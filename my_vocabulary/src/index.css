@@ -12,19 +12,31 @@ code {
     monospace;
 }
 
+a {
+  text-decoration: none;
+}
+
+h1 {
+  color: #81b874;
+  font-weight: 900;
+}
+
+h2 {
+  font-weight: 700;
+  margin: 0;
+}
+span {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 35px;
 }
 
-.dark-mode {
-  background-color: black;
-}
-
-.dark-mode h1 {
-  color: #fff;
-}
 .container {
   max-width: 1000px;
   margin-right: auto;
@@ -46,7 +58,7 @@ code {
 }
 
 .note-new {
-  background-color: #67d7cc;
+  background-color: #94c47d;
   margin: 30px auto;
   width: 340px;
   height: 340px;
@@ -55,15 +67,19 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-
-textarea {
+.note-new h2 {
+  text-align: center;
+  font-weight: 700;
+}
+input {
   border: none;
   resize: none;
-  background-color: #67d7cc;
+  background-color: #94c47d;
 }
 
-textarea:focus {
+input:focus {
   outline: none;
 }
 
@@ -80,14 +96,12 @@ textarea:focus {
 }
 
 .note {
-  background-color: #fef68a;
+  background-color: #94c47d;
   border-radius: 10px;
   padding: 1rem;
   min-height: 170px;
-  display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* white-space: pre-wrap; */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .note-footer {
@@ -112,4 +126,8 @@ textarea:focus {
 
 .search input:focus {
   outline: none;
+}
+
+.check-mode .note {
+  background-color: #fff;
 }

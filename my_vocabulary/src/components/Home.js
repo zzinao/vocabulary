@@ -1,70 +1,46 @@
-import { useState } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import Word from './Word'
-import AddWord from './AddWord'
-
+import { useSelector, useDispatch } from 'react-redux'
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 
-const Home = () => {
+import { loadWordFB } from '../redux/modules/myword'
+
+const Home = (props) => {
   const history = useHistory()
-  const [notes, setNotes] = useState([
-    {
-      text: 'Hello',
-      ex: '단어 예시',
-      sample: '왜 안되지',
-      date: '15/04/2021',
-    },
-    {
-      text: 'Word',
-      ex: '단어 예시',
-      sample: 'ㅇㅅㅇ',
-      date: '21/04/2021',
-    },
-    {
-      text: 'Word',
-      ex: '단어 예시',
-      sample: '흠흠...',
-      date: '21/04/2021',
-    },
-    {
-      text: 'Word',
-      ex: '단어 예시',
-      sample: '흠냐뤼',
-      date: '21/04/2021',
-    },
-  ])
+  const myword_lists = useSelector((state) => state.myword.list)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(loadWordFB())
+  }, [])
 
-  const addNote = (text, ex, sample) => {
-    const date = new Date()
-    const newNote = {
-      text: text,
-      ex: ex,
-      sample: sample,
-      date: date.toLocaleDateString(),
-    }
-    const newNotes = [...notes, newNote]
-    setNotes(newNotes)
-  }
-
-  //   const handleColor = () => {
-  //     stateBoxcColor: ''
+  // const addNote = (text, ex, sample) => {
+  //   const date = new Date()
+  //   const newNote = {
+  //     text: text,
+  //     ex: ex,
+  //     sample: sample,
+  //     date: date.toLocaleDateString(),
   //   }
+  //   const newNotes = [...myword_lists, newNote]
+  //   setNotes(newNotes)
+  // }
 
-  //   const deleteNote = (id) => {
-  //     const newNotes = notes.filter((note) => note.id !== id)
-  //     setNotes(newNotes)
-  //   }
+  // const deleteNote = (id) => {
+  //   const newNotes = myword_lists.filter((note) => note.id !== id)
+  //   setNotes(newNotes)
+  // }
 
   return (
     <div>
       <div className="notes-list">
-        {notes.map((note) => (
+        {myword_lists.map((note, i) => (
           <Word
-            text={note.text}
+            key={note.word}
+            word={note.word}
+            df={note.df}
             ex={note.ex}
-            sample={note.sample}
-            date={note.date}
-            handleAddNote={addNote}
+            // complete={note}
           />
         ))}
       </div>
@@ -76,7 +52,7 @@ const Home = () => {
         <BsFillFileEarmarkPlusFill
           className="add-icon"
           size="5em"
-          color="#fef68a"
+          color="#9FC87F"
         />
       </div>
     </div>
