@@ -20,7 +20,6 @@ const AddWord = (props) => {
       return false
     }
     const obj = { word, df, ex, completed }
-    console.log(obj)
 
     dispatch(addWordFB(obj))
     props.history.push('/')
@@ -28,7 +27,7 @@ const AddWord = (props) => {
 
   return (
     <div className="note-new">
-      <h2>새 단어 등록'</h2>
+      <h2>새 단어 등록</h2>
       <span className="addtext">Word</span>
       <input type="text" placeholder="Type to add a word..." ref={wordRef} />
       <span className="addtext">설명</span>

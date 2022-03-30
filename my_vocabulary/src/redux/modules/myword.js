@@ -10,9 +10,9 @@ import {
   setDoc,
   deleteDoc,
 } from 'firebase/firestore'
-import { MdDomainVerification } from 'react-icons/md'
 
-// const myword_db = firestore.collection('myword')
+const myword_db = collection(db, 'myvoca')
+
 //Action
 const LOAD = 'myword/LOAD'
 const CREATE = 'myword/CREATE'
@@ -36,8 +36,8 @@ export const createMyword = (word) => {
   return { type: CREATE, word }
 }
 
-export const updateMyword = (myvoca) => {
-  return { type: UPDATE, myvoca }
+export const updateMyword = (word) => {
+  return { type: UPDATE, word }
 }
 
 export const completeMyword = (id) => {
@@ -47,6 +47,7 @@ export const completeMyword = (id) => {
 export const deleteMyword = (word) => {
   return { type: DELETE, word }
 }
+
 //firebase middlewares
 //load funciton
 export const loadWordFB = () => {
@@ -78,21 +79,23 @@ export const addWordFB = (myvoca) => {
 // update function
 export const updateWordFB = (myvoca) => {
   return async function (dispatch, getState) {
-    const docRef = doc(db, 'myvoca', myvoca.word)
-    await updateDoc(docRef, { completed: !myvoca.completed })
+    const docRef = doc(db, 'myvoca', myvoca.id)
+
     const _voca_list = getState().myvoca.list
     const voca_index = _voca_list.findIndex((w) => {
-      return w.id === myvoca.word
+      return w.id === myvoca.id
     })
+    console.log(_voca_list[voca_index])
+    await updateDoc(docRef, { completed: !myvoca.completed })
     dispatch(updateMyword(voca_index))
   }
 }
 
 // complete toggle function
 export const completeWordFB = (myvoca) => {
-  return async function (dispatch) {
-    doc(db, myvoca.word).update({ complete: !myvoca.complete })
-    dispatch(completeMyword(myvoca.word))
+  return function (dispatch) {
+    myword_db.doc(myvoca.id).update({ completed: !myvoca.completed })
+    dispatch(completeMyword(myvoca.id))
   }
 }
 
@@ -122,6 +125,20 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         list: update_words,
+      }
+
+    case 'id/COMPETE':
+      const new_word_list = state.list.map((id) =>
+        id.id === action.id
+          ? {
+              ...id,
+              completed: !id.completed,
+            }
+          : id,
+      )
+      return {
+        ...state,
+        list: new_word_list,
       }
     case 'myword/DELETE': {
       const left_words = state.list.filter((w) => w.word !== action.word)

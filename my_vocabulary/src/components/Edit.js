@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { updateWordFB } from '../redux/modules/myword'
 import { useParams } from 'react-router'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Edit = (props) => {
   let params = useParams()
-
-  const wordEdit = props.match.params.word
-  const dfEdit = props.match.params.df
-  const exEdit = props.match.params.ex
+  const data = props.location.state
+  console.log(data)
+  const word_list = useSelector((state) => state.myword.list)
+  console.log(word_list)
 
   const dispatch = useDispatch()
 
@@ -36,11 +36,11 @@ const Edit = (props) => {
     <div className="note-new">
       <h2>단어 수정하기</h2>
       <span>Word</span>
-      <input type="text" ref={wordRef} value={wordEdit} />
+      <input type="text" ref={wordRef} value={data.word} />
       <span>설명</span>
-      <input type="text" ref={dfRef} value={dfEdit} />
+      <input type="text" ref={dfRef} value={data.df} />
       <span>예시</span>
-      <input type="text" ref={exRef} value={exEdit} />
+      <input type="text" ref={exRef} value={data.ex} />
       <button className="save" onClick={clickEvent}>
         Save
       </button>
