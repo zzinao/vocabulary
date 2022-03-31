@@ -1,22 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 //상세페이지
 import AddWord from './components/AddWord'
 import Header from './components/Header'
 import Home from './components/Home'
 import Edit from './components/Edit'
-// firebase
-import { db } from './firebase'
-import { getDoc, doc, getFirestore, updateDoc } from 'firebase/firestore'
 
 const App = () => {
+  const [darkMode, setDarkMode] = useState(false)
   return (
-    <div className="container">
-      <Header />
-      <Route path="/" exact component={Home} />
-      <Route path="/add" exact component={AddWord} />
-      <Route path="/edit/:word" component={Edit} />
+    <div className={`${darkMode && 'dark-mode'}`}>
+      <div className="container">
+        <Header handleToggleDarkMode={setDarkMode} />
+        <Route path="/" exact component={Home} />
+        <Route path="/add" exact component={AddWord} />
+        <Route path="/edit/:word" component={Edit} />
+      </div>
     </div>
   )
 }

@@ -14,34 +14,11 @@ const Home = (props) => {
     dispatch(loadWordFB())
   }, [])
 
-  // const addNote = (text, ex, sample) => {
-  //   const date = new Date()
-  //   const newNote = {
-  //     text: text,
-  //     ex: ex,
-  //     sample: sample,
-  //     date: date.toLocaleDateString(),
-  //   }
-  //   const newNotes = [...myword_lists, newNote]
-  //   setNotes(newNotes)
-  // }
-
-  // const deleteNote = (id) => {
-  //   const newNotes = myword_lists.filter((note) => note.id !== id)
-  //   setNotes(newNotes)
-  // }
-
   return (
     <div>
       <div className="notes-list">
         {myword_lists.map((note, i) => (
-          <Word
-            key={note.word}
-            word={note.word}
-            df={note.df}
-            ex={note.ex}
-            // complete={note}
-          />
+          <Word key={note.word} word={note.word} df={note.df} ex={note.ex} />
         ))}
       </div>
       <div

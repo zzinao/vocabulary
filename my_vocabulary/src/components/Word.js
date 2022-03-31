@@ -1,26 +1,17 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MdDeleteForever, MdEdit, MdCheck } from 'react-icons/md'
-import {
-  completeWordFB,
-  updateWordFB,
-  deleteWordFB,
-} from '../redux/modules/myword'
+import { deleteWordFB } from '../redux/modules/myword'
 import { Link } from 'react-router-dom'
-import AddWord from './AddWord'
 
-const Word = ({ word, df, ex, completed }) => {
+const Word = ({ word, df, ex }) => {
   const dispatch = useDispatch()
   const word_list = useSelector((state) => state.myword.list)
-  console.log(word_list)
-  console.log(word)
 
   const [checkmode, setCheckMode] = useState('#94C47D')
   const toggleChcek = (id) => {
     setCheckMode(checkmode === '#94C47D' ? '#CBE1C5' : '#94C47D')
   }
-  //   dispatch(completeWordFB(id))
-  // }
 
   const deleteWord = () => {
     dispatch(deleteWordFB(word))
