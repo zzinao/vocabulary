@@ -25,8 +25,6 @@ const initialState = {
   list: [],
 }
 
-// export const addWord = (word) => ({ type: ADD, word })
-
 //Action Creators
 export const loadMyword = (word) => {
   return { type: LOAD, word }
@@ -49,6 +47,7 @@ export const deleteMyword = (word) => {
 }
 
 //firebase middlewares
+
 //load funciton
 export const loadWordFB = () => {
   return async function (dispatch) {
@@ -68,28 +67,22 @@ export const addWordFB = (myvoca) => {
     await setDoc(doc(db, 'myvoca', myvoca.word), myvoca)
     console.log(myvoca)
   }
-
-  //   return async function () {
-  //     await updateDoc(doc(db, 'myvoca', 'vocabulary'), {
-  //       [list[0]]: list,
-  //     })
-  //   }
 }
 
 // update function
-export const updateWordFB = (myvoca) => {
-  return async function (dispatch, getState) {
-    const docRef = doc(db, 'myvoca', myvoca.id)
+// export const updateWordFB = (myvoca) => {
+//   return async function (dispatch, getState) {
+//     const docRef = doc(db, 'myvoca', myvoca.id)
 
-    const _voca_list = getState().myvoca.list
-    const voca_index = _voca_list.findIndex((w) => {
-      return w.id === myvoca.id
-    })
-    console.log(_voca_list[voca_index])
-    await updateDoc(docRef, { completed: !myvoca.completed })
-    dispatch(updateMyword(voca_index))
-  }
-}
+//     const _voca_list = getState().myvoca.list
+//     const voca_index = _voca_list.findIndex((w) => {
+//       return w.id === myvoca.id
+//     })
+//     console.log(_voca_list[voca_index])
+//     await updateDoc(docRef, { completed: !myvoca.completed })
+//     dispatch(updateMyword(voca_index))
+//   }
+// }
 
 // complete toggle function
 export const completeWordFB = (myvoca) => {
@@ -104,6 +97,7 @@ export const deleteWordFB = (id) => {
   return async function (dispatch) {
     const docRef = doc(db, 'myvoca', id)
     await deleteDoc(docRef)
+    alert('삭제합니다요~')
     dispatch(deleteMyword(id))
   }
 }

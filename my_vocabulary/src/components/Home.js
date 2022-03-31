@@ -29,7 +29,7 @@ const Home = (props) => {
         <BsFillFileEarmarkPlusFill
           className="add-icon"
           size="5em"
-          color="#9FC87F"
+          color="#70A674"
         />
       </div>
     </div>

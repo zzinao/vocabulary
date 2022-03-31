@@ -25,7 +25,7 @@ const Word = ({ word, df, ex }) => {
             onClick={() => toggleChcek(word_list)}
             className="check-icon"
             size="1.3em"
-            color="black"
+            color="#191A19"
           />
           <Link
             to={{
@@ -33,14 +33,14 @@ const Word = ({ word, df, ex }) => {
               state: { word, df, ex },
             }}
           >
-            <MdEdit className="edit-icon" size="1.3em" color="black" />
+            <MdEdit className="edit-icon" size="1.3em" color="#191A19" />
           </Link>
 
           <MdDeleteForever
             onClick={() => deleteWord()}
             className="delete-icon"
             size="1.3em"
-            color="black"
+            color="#191A19"
           />
         </div>
       </div>

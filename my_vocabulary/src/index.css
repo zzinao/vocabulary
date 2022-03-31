@@ -5,8 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition-duration: 0.3s;
-  background-color: #fff;
 }
 
 code {
@@ -25,16 +23,34 @@ h1 {
 
 h2 {
   font-weight: 700;
+  color: #191a19;
   margin: 0;
+}
+
+p {
+  font-weight: 600;
+  color: #191a19;
 }
 span {
   font-size: 20px;
   font-weight: 600;
 }
+.false {
+  transition-duration: 0.3s;
+  background-color: #fff;
+}
 
 .dark-mode {
   transition-duration: 0.3s;
   background-color: black;
+}
+
+.dark-mode h2 {
+  color: #fff;
+}
+
+.dark-mode p {
+  color: #fff;
 }
 
 .header {
